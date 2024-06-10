@@ -59,4 +59,5 @@ dependencies {
 
     // Modules
     implementation(project(":uikit"))
+    implementation(project(":ui"))
 }
