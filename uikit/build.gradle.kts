@@ -43,6 +43,6 @@ dependencies {
     api(platform(libs.compose.bom))
     api(libs.compose.material3)
     api(libs.compose.ui.graphics)
-    implementation(libs.compose.ui.text.google.fonts)
+    api(libs.compose.ui.text.google.fonts)
     debugApi(libs.compose.ui.tooling)
 }
