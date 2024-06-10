@@ -11,14 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.lesa.weather.ui.theme.WeatherTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            WeatherTheme {
+            com.lesa.uikit.WeatherTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",
@@ -36,7 +35,7 @@ fun Greeting(
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = "Hello $name!",
+        text = "Salam $name!",
         modifier = modifier
     )
 }
@@ -44,7 +43,7 @@ fun Greeting(
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    WeatherTheme {
+    com.lesa.uikit.WeatherTheme {
         Greeting("Android")
     }
 }
