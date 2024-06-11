@@ -16,6 +16,9 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        buildConfigField("String", "WEATHER_API_KEY", "\"b8926f206a5c4dc2bef93458240102\"")
+        buildConfigField("String", "WEATHER_API_BASE_URL", "\"http://api.weatherapi.com/v1/\"")
+
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -37,6 +40,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 
@@ -64,6 +68,7 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     // Modules
+    implementation(project(":api"))
     implementation(project(":uikit"))
     implementation(project(":ui"))
 }

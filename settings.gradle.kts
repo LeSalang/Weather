@@ -23,3 +23,4 @@ rootProject.name = "Weather"
 include(":app")
 include(":ui")
 include(":uikit")
+include(":api")
