@@ -1,7 +1,7 @@
 package com.lesa.api
 
 import com.lesa.api.models.AirQualityIndex
-import com.lesa.api.models.WeatherResponseDto
+import com.lesa.api.models.CurrentWeatherResponseDto
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -20,15 +20,18 @@ interface WeatherApi {
         @Query("q") location: String = "Baku", // TODO delete after testing
         @Query("aqi") aqi: String = AirQualityIndex.ENABLED.value,
         @Query("lang") lang: String? = null
-    ): WeatherResponseDto
+    ): CurrentWeatherResponseDto
 }
 
 fun createWeatherApi(
     baseUrl: String,
     apiKey: String,
     okHttpClient: OkHttpClient? = null,
-    json: Json = Json
+    //json: Json = Json
 ): WeatherApi {
+    val json = Json {
+        ignoreUnknownKeys = true
+    }
     return retrofit(
         baseUrl = baseUrl,
         apiKey = apiKey,

@@ -10,20 +10,37 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lesa.uikit.Dimensions.dimen16
 import com.lesa.uikit.Dimensions.dimen32
 import com.lesa.uikit.Dimensions.dimen64
 import com.lesa.uikit.Dimensions.dimen8
 import com.lesa.uikit.WeatherTheme
+import com.lesa.uilogic.MainScreenViewModel
+import com.lesa.uilogic.models.CurrentWeatherUi
 
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
 ) {
+    MainScreen(
+        mainScreenViewModel = viewModel(),
+        modifier = modifier
+    )
+}
+
+@Composable
+internal fun MainScreen(
+    mainScreenViewModel: MainScreenViewModel,
+    modifier: Modifier = Modifier,
+) {
+    val currentWeatherUi by mainScreenViewModel.currentWeather.collectAsState()
     Column(
         verticalArrangement = Arrangement.spacedBy(dimen32),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -32,12 +49,15 @@ fun MainScreen(
             .padding(dimen16)
     ) {
         Text(
-            text = "City",
+            text = currentWeatherUi?.name ?: "name",
             style = WeatherTheme.typography.headlineSmall,
             textAlign = TextAlign.Center,
             color = WeatherTheme.colorScheme.primary,
         )
-        CurrentWeatherBlock(modifier = Modifier.weight(1f))
+        CurrentWeatherBlock(
+            modifier = Modifier.weight(1f),
+            currentWeatherUi = currentWeatherUi
+        )
         Spacer(modifier = Modifier.size(dimen64))
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
@@ -54,26 +74,27 @@ fun MainScreen(
 @Composable
 fun CurrentWeatherBlock(
     modifier: Modifier = Modifier,
+    currentWeatherUi: CurrentWeatherUi?
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
         Text(
-            text = "10.06.2024",
+            text = currentWeatherUi?.lastUpdated ?: "lastUpdated",
             style = WeatherTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
             color = WeatherTheme.colorScheme.primary,
         )
         Spacer(modifier = Modifier.size(dimen8))
         Text(
-            text = "+23 C",
+            text = currentWeatherUi?.tempC.toString(),
             style = WeatherTheme.typography.headlineLarge,
             textAlign = TextAlign.Center,
             color = WeatherTheme.colorScheme.primary,
         )
         Text(
-            text = "Partly Cloudy",
+            text = currentWeatherUi?.conditionText ?: "conditionText",
             style = WeatherTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
             color = WeatherTheme.colorScheme.primary,

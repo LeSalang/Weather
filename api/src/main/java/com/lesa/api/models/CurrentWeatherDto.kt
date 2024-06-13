@@ -4,11 +4,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CurrentDto(
+data class CurrentWeatherDto(
     @SerialName("last_updated_epoch")
     val lastUpdatedEpoch: Long, // Local time when the real time data was updated in Unix time
     @SerialName("last_updated") val lastUpdated: String, // Local time when the real time data was updated
-    @SerialName("temp_c") val tempC: Double, // Temperature in Celsius
+    @SerialName("temp_c") val tempC: Double? = null, // Temperature in Celsius
     @SerialName("temp_f") val tempF: Double, // Temperature in Fahrenheit
     @SerialName("is_day") val isDay: Int, // Whether to show day condition icon or night icon (1 = Yes, 0 = No)
     @SerialName("condition") val condition: ConditionDto, // Weather condition details

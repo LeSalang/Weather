@@ -11,10 +11,10 @@ java {
 
 dependencies {
     api(libs.kotlinx.serialization.json)
-    api(libs.okhttp)
-    api(libs.okhttp.logging.interceptor) // TODO remove to app module?
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.kotlinx.serialization)
+    api(libs.okhttp3.okhttp)
+    api(libs.okhttp3.logging.interceptor) // TODO remove to app module?
+    implementation(libs.retrofit2.retrofit)
+    implementation(libs.retrofit2.converter.kotlinx.serialization)
 }
 
 //implementation(libs.kotlinx.coroutines.core)
