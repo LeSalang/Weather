@@ -3,9 +3,15 @@ package com.lesa.data
 import com.lesa.api.models.CurrentWeatherResponseDto
 import com.lesa.data.models.CurrentWeather
 
+const val FAHRENHEIT_TO_CELSIUS_SCALE = 5.0 / 9.0
+const val FAHRENHEIT_TO_CELSIUS_OFFSET = 32
+const val INCHES_TO_MM_SCALE = 25.4
+
 internal fun CurrentWeatherResponseDto.toCurrentWeather(): CurrentWeather {
-    val tempC = currentWeather.tempC ?: currentWeather.tempF.let { (it - 32) * 5 / 9 } // TODO improve
-    val pressureMmHg = currentWeather.pressureIn * 25.4 // TODO improve
+    val tempC = currentWeather.tempC ?: currentWeather.tempF.let {
+        (it - FAHRENHEIT_TO_CELSIUS_OFFSET) * FAHRENHEIT_TO_CELSIUS_SCALE
+    } // Provide Celsius or Convert Fahrenheit to Celsius
+    val pressureMmHg = currentWeather.pressureIn * INCHES_TO_MM_SCALE // Convert inches to mm Hg
 
     return CurrentWeather(
         name = location.name,
