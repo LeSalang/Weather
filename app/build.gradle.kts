@@ -69,7 +69,8 @@ dependencies {
 
     // Modules
     implementation(project(":api"))
-    implementation(project(":uikit"))
-    implementation(project(":ui"))
+    implementation(project(":common"))
     implementation(project(":data"))
+    implementation(project(":ui"))
+    implementation(project(":uikit"))
 }

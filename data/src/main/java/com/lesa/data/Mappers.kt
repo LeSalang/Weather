@@ -2,20 +2,17 @@ package com.lesa.data
 
 import com.lesa.api.models.CurrentWeatherResponseDto
 import com.lesa.data.models.CurrentWeather
-import java.math.RoundingMode
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
 
-const val FAHRENHEIT_TO_CELSIUS_SCALE = 5.0 / 9.0
-const val FAHRENHEIT_TO_CELSIUS_OFFSET = 32
-const val INCHES_TO_MM_SCALE = 25.4
+private const val FAHRENHEIT_TO_CELSIUS_SCALE = 5.0 / 9.0
+private const val FAHRENHEIT_TO_CELSIUS_OFFSET = 32
+private const val INCHES_TO_MM_SCALE = 25.4
 
 internal fun CurrentWeatherResponseDto.toCurrentWeather(): CurrentWeather {
     val tempC = currentWeather.tempC ?: currentWeather.tempF.let {
-        ((it - FAHRENHEIT_TO_CELSIUS_OFFSET) * FAHRENHEIT_TO_CELSIUS_SCALE * 10).roundToInt() / 10.0
+        (it - FAHRENHEIT_TO_CELSIUS_OFFSET) * FAHRENHEIT_TO_CELSIUS_SCALE
     }
 
-    val pressureMmHg = (currentWeather.pressureIn * INCHES_TO_MM_SCALE * 10).roundToInt() / 10.0
+    val pressureMmHg = currentWeather.pressureIn * INCHES_TO_MM_SCALE
 
     return CurrentWeather(
         name = location.name,

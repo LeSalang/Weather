@@ -23,7 +23,6 @@ import com.lesa.uikit.Dimensions.dimen64
 import com.lesa.uikit.Dimensions.dimen8
 import com.lesa.uikit.WeatherTheme
 import com.lesa.uilogic.MainScreenViewModel
-import com.lesa.uilogic.models.CurrentWeatherUi
 
 @Composable
 fun MainScreen(
@@ -40,7 +39,7 @@ internal fun MainScreen(
     mainScreenViewModel: MainScreenViewModel,
     modifier: Modifier = Modifier,
 ) {
-    val currentWeatherUi by mainScreenViewModel.currentWeather.collectAsState()
+    val currentWeatherViewState by mainScreenViewModel.currentWeatherViewState.collectAsState()
     Column(
         verticalArrangement = Arrangement.spacedBy(dimen32),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -48,15 +47,9 @@ internal fun MainScreen(
             .fillMaxSize()
             .padding(dimen16)
     ) {
-        Text(
-            text = currentWeatherUi?.name ?: "name",
-            style = WeatherTheme.typography.headlineSmall,
-            textAlign = TextAlign.Center,
-            color = WeatherTheme.colorScheme.primary,
-        )
-        CurrentWeatherBlock(
-            modifier = Modifier.weight(1f),
-            currentWeatherUi = currentWeatherUi
+        CurrentWeatherView(
+            currentWeatherViewStates = currentWeatherViewState,
+            modifier = Modifier.weight(1f)
         )
         Spacer(modifier = Modifier.size(dimen64))
         Row(
@@ -68,37 +61,6 @@ internal fun MainScreen(
             FutureWeatherBlock()
             FutureWeatherBlock()
         }
-    }
-}
-
-@Composable
-fun CurrentWeatherBlock(
-    modifier: Modifier = Modifier,
-    currentWeatherUi: CurrentWeatherUi?
-) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-    ) {
-        Text(
-            text = currentWeatherUi?.lastUpdated ?: "lastUpdated",
-            style = WeatherTheme.typography.titleLarge,
-            textAlign = TextAlign.Center,
-            color = WeatherTheme.colorScheme.primary,
-        )
-        Spacer(modifier = Modifier.size(dimen8))
-        Text(
-            text = currentWeatherUi?.tempC.toString(),
-            style = WeatherTheme.typography.headlineLarge,
-            textAlign = TextAlign.Center,
-            color = WeatherTheme.colorScheme.primary,
-        )
-        Text(
-            text = currentWeatherUi?.conditionText ?: "conditionText",
-            style = WeatherTheme.typography.titleLarge,
-            textAlign = TextAlign.Center,
-            color = WeatherTheme.colorScheme.primary,
-        )
     }
 }
 

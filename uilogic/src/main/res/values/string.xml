@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lust_updated">Lust updated: %s</string>
+    <string name="location">%s, %s</string>
+    <string name="temp">%.1f°C</string>
+</resources>

@@ -20,9 +20,10 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Weather"
+include(":api")
 include(":app")
+include(":common")
+include(":data")
 include(":ui")
 include(":uikit")
-include(":api")
 include(":uilogic")
-include(":data")

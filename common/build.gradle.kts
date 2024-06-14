@@ -1,18 +1,14 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.kapt)
-    alias(libs.plugins.hilt.android)
 }
 
 android {
-    namespace = "com.lesa.uilogic"
+    namespace = "com.lesa.common"
     compileSdk = libs.versions.androidSdk.compile.get().toInt()
 
     defaultConfig {
         minSdk = libs.versions.androidSdk.min.get().toInt()
-
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -31,11 +27,4 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
-    implementation(project(":common"))
-    implementation(project(":data"))
 }

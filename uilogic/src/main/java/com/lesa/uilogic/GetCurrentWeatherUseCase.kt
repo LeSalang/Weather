@@ -1,7 +1,6 @@
 package com.lesa.uilogic
 
 import com.lesa.data.WeatherRepository
-import com.lesa.data.WeatherRepositoryImpl
 import com.lesa.uilogic.models.CurrentWeatherUi
 import javax.inject.Inject
 

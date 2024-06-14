@@ -2,6 +2,8 @@ package com.lesa.weather
 
 import com.lesa.api.WeatherApi
 import com.lesa.api.createWeatherApi
+import com.lesa.common.AndroidLogcatLogger
+import com.lesa.common.Logger
 import com.lesa.data.WeatherRepository
 import com.lesa.data.WeatherRepositoryImpl
 import dagger.Module
@@ -42,4 +44,7 @@ object AppModule {
     fun provideWeatherRepository(weatherApi: WeatherApi): WeatherRepository {
         return WeatherRepositoryImpl(weatherApi)
     }
+
+    @Provides
+    fun provideLogger(): Logger = AndroidLogcatLogger()
 }
