@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="last_updated">Last updated: %s</string>
+    <string name="location">%s, %s</string>
+    <string name="temp">%.1f°C</string>
+    <string name="wind_speed">Wind speed: %.1f°C km/h, direction: %s</string>
+    <string name="atmospheric_pressure">Atmospheric pressure: %.0f mmHg</string>
+    <string name="uv_index">UV Index: %.0f</string>
+    <string name="aqi">CO: %.2f\nNO2: %.2f\nO3: %.2f\nSO2: %.2f\nPM2.5: %.2f\nPM10: %.2f</string>
+
+</resources>

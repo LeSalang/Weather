@@ -43,7 +43,7 @@ fun CurrentWeatherSuccessView(
     ) {
         Text(
             text = stringResource(
-                id = com.lesa.uilogic.R.string.location,
+                id = R.string.location,
                 currentWeatherUi.name,
                 currentWeatherUi.country
             ),
@@ -52,21 +52,54 @@ fun CurrentWeatherSuccessView(
             color = WeatherTheme.colorScheme.primary,
         )
         Text(
-            text = stringResource(id = com.lesa.uilogic.R.string.lust_updated, currentWeatherUi.lastUpdated),
+            text = stringResource(id = R.string.last_updated, currentWeatherUi.lastUpdated),
             style = WeatherTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = WeatherTheme.colorScheme.primary,
         )
         Spacer(modifier = Modifier.size(Dimensions.dimen8))
         Text(
-            text = stringResource(id = com.lesa.uilogic.R.string.temp, currentWeatherUi.tempC),
+            text = stringResource(id = R.string.temp, currentWeatherUi.tempC),
             style = WeatherTheme.typography.headlineLarge,
             textAlign = TextAlign.Center,
             color = WeatherTheme.colorScheme.primary,
         )
+        Spacer(modifier = Modifier.size(Dimensions.dimen8))
         Text(
             text = currentWeatherUi.conditionText,
             style = WeatherTheme.typography.titleLarge,
+            textAlign = TextAlign.Center,
+            color = WeatherTheme.colorScheme.primary,
+        )
+        Text(
+            text = stringResource(id = R.string.wind_speed, currentWeatherUi.windKph, currentWeatherUi.windDir),
+            style = WeatherTheme.typography.bodyLarge,
+            textAlign = TextAlign.Center,
+            color = WeatherTheme.colorScheme.primary,
+        )
+        Text(
+            text = stringResource(id = R.string.atmospheric_pressure, currentWeatherUi.pressureMmHg),
+            style = WeatherTheme.typography.bodyLarge,
+            textAlign = TextAlign.Center,
+            color = WeatherTheme.colorScheme.primary,
+        )
+        Text(
+            text = stringResource(id = R.string.uv_index, currentWeatherUi.uv),
+            style = WeatherTheme.typography.bodyLarge,
+            textAlign = TextAlign.Center,
+            color = WeatherTheme.colorScheme.primary,
+        )
+        Text(
+            text = stringResource(
+                id = R.string.aqi,
+                currentWeatherUi.co,
+                currentWeatherUi.no2,
+                currentWeatherUi.o3,
+                currentWeatherUi.so2,
+                currentWeatherUi.pm25,
+                currentWeatherUi.pm10
+            ),
+            style = WeatherTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = WeatherTheme.colorScheme.primary,
         )
