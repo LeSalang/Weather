@@ -38,11 +38,17 @@ android {
 }
 
 dependencies {
+    // Core
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // DI
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
     implementation(libs.javax.inject)
+    kapt(libs.hilt.compiler)
+
+    // UI
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.lottie.compose)
 
     // Modules
     implementation(project(":uikit"))

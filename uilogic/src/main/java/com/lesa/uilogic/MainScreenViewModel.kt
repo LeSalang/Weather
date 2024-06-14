@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.lesa.common.Logger
 import com.lesa.uilogic.models.CurrentWeatherUi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -30,6 +31,7 @@ class MainScreenViewModel @Inject internal constructor(
     @Suppress("TooGenericExceptionCaught")
     private fun fetchCurrentWeather() {
         viewModelScope.launch {
+            delay(5000) // TODO remove this after testing loading element
             try {
                 _currentWeatherViewState.value = ViewState.Success(getCurrentWeatherUseCase.get().invoke())
             } catch (e: IOException) {

@@ -56,7 +56,6 @@ internal fun MainScreen(
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
         ) {
             FutureWeatherBlock()
             FutureWeatherBlock()
