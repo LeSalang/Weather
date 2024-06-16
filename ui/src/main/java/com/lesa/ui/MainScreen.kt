@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -23,6 +24,7 @@ import com.lesa.uikit.Dimensions.dimen64
 import com.lesa.uikit.Dimensions.dimen8
 import com.lesa.uikit.WeatherTheme
 import com.lesa.uilogic.MainScreenViewModel
+import com.lesa.uilogic.ViewState
 
 @Composable
 fun MainScreen(
@@ -40,25 +42,32 @@ internal fun MainScreen(
     modifier: Modifier = Modifier,
 ) {
     val currentWeatherViewState by mainScreenViewModel.currentWeatherViewState.collectAsState()
-    Column(
-        verticalArrangement = Arrangement.spacedBy(dimen32),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .fillMaxSize()
-            .padding(dimen16)
-    ) {
-        CurrentWeatherView(
-            currentWeatherViewStates = currentWeatherViewState,
-            modifier = Modifier.weight(1f)
-        )
-        Spacer(modifier = Modifier.size(dimen64))
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            modifier = Modifier
-                .fillMaxWidth()
+    val astroViewState by mainScreenViewModel.astroViewState.collectAsState()
+    if (currentWeatherViewState is ViewState.Loading || astroViewState is ViewState.Loading) {
+        LoadingView()
+    } else {
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(dimen32),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
+                .fillMaxSize()
+                .padding(dimen16)
         ) {
-            FutureWeatherBlock()
-            FutureWeatherBlock()
+            item {
+                CurrentWeatherView(
+                    currentWeatherViewState = currentWeatherViewState,
+                )
+                AstroView(astroViewState = astroViewState,)
+                Spacer(modifier = Modifier.size(dimen64))
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    FutureWeatherBlock()
+                    FutureWeatherBlock()
+                }
+            }
         }
     }
 }

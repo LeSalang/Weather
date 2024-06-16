@@ -1,7 +1,13 @@
 package com.lesa.data
 
 import com.lesa.api.models.CurrentWeatherResponseDto
+import com.lesa.api.models.astro.AstroDto
+import com.lesa.api.models.astro.AstronomyResponseDto
+import com.lesa.data.models.Astro
 import com.lesa.data.models.CurrentWeather
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 private const val FAHRENHEIT_TO_CELSIUS_SCALE = 5.0 / 9.0
 private const val FAHRENHEIT_TO_CELSIUS_OFFSET = 32
@@ -36,4 +42,26 @@ internal fun CurrentWeatherResponseDto.toCurrentWeather(): CurrentWeather {
         pm25 = currentWeather.airQuality.pm25,
         pm10 = currentWeather.airQuality.pm10
     )
+}
+
+internal fun AstronomyResponseDto.toAstro(): Astro {
+    val astro = astronomy.astro
+    return Astro(
+        sunriseTime = parseDate(astro.sunriseTime),
+        sunsetTime = parseDate(astro.sunsetTime),
+        moonriseTime = parseDate(astro.moonriseTime),
+        moonsetTime = parseDate(astro.moonsetTime),
+        moonPhase = astro.moonPhase,
+        moonIllumination = astro.moonIllumination
+    )
+}
+
+private fun parseDate(dateString: String): Date? {
+    val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+    return try {
+        dateFormat.parse(dateString)
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
 }
