@@ -22,32 +22,32 @@ fun AirQualityView(
         )
         WeatherItem(
             parameter = stringResource(id = R.string.co),
-            value = airQuality.co.toString(),
+            value = airQuality.co,
             measure = stringResource(id = R.string.micrograms_per_cubic_metre),
         )
         WeatherItem(
             parameter = stringResource(id = R.string.no2),
-            value = airQuality.no2.toString(),
+            value = airQuality.no2,
             measure = stringResource(id = R.string.micrograms_per_cubic_metre),
         )
         WeatherItem(
             parameter = stringResource(id = R.string.o3),
-            value = airQuality.o3.toString(),
+            value = airQuality.o3,
             measure = stringResource(id = R.string.micrograms_per_cubic_metre),
         )
         WeatherItem(
             parameter = stringResource(id = R.string.so2),
-            value = airQuality.so2.toString(),
+            value = airQuality.so2,
             measure = stringResource(id = R.string.micrograms_per_cubic_metre),
         )
         WeatherItem(
             parameter = stringResource(id = R.string.pm2_5),
-            value = airQuality.pm25.toString(),
+            value = airQuality.pm25,
             measure = stringResource(id = R.string.micrograms_per_cubic_metre),
         )
         WeatherItem(
             parameter = stringResource(id = R.string.pm10),
-            value = airQuality.pm10.toString(),
+            value = airQuality.pm10,
             measure = stringResource(id = R.string.micrograms_per_cubic_metre),
         )
     }

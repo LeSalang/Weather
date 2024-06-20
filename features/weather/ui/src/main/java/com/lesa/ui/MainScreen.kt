@@ -16,7 +16,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lesa.uikit.Dimensions.dimen16
 import com.lesa.uikit.Dimensions.dimen8
@@ -53,10 +52,10 @@ internal fun MainScreen(
                         .padding(dimen16)
                 ) {
                     item {
-                        LocationView(locationUi = weatherUi.locationUi,)
-                        CurrentWeatherView(currentWeatherUi = weatherUi.currentWeatherUi,)
+                        LocationView(locationUi = weatherUi.locationUi)
+                        CurrentWeatherView(currentWeatherUi = weatherUi.currentWeatherUi)
                         Spacer(modifier = Modifier.size(dimen16))
-                        AstroView(astroUi = weatherUi.forecastDayUiList.first().astroUi,)
+                        AstroView(astroUi = weatherUi.forecastDayUiList.first().astroUi)
                         Spacer(modifier = Modifier.size(dimen16))
                         AirQualityView(airQuality = weatherUi.airQualityUi)
                         Spacer(modifier = Modifier.size(dimen16))
@@ -102,13 +101,5 @@ fun FutureWeatherBlock(
             textAlign = TextAlign.Center,
             color = WeatherTheme.colorScheme.primary,
         )
-    }
-}
-
-@Preview
-@Composable
-fun MainScreenPreview() {
-    WeatherTheme {
-        MainScreen()
     }
 }

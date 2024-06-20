@@ -44,7 +44,7 @@ fun CurrentWeatherView(
         Heading(text = stringResource(id = R.string.current_weather))
         WeatherItem(
             parameter = stringResource(id = R.string.wind_speed),
-            value = currentWeatherUi.windKph.toString(),
+            value = currentWeatherUi.windKph,
             measure = stringResource(id = R.string.kilometre_per_hour),
         )
         WeatherItem(
@@ -53,12 +53,12 @@ fun CurrentWeatherView(
         )
         WeatherItem(
             parameter = stringResource(id = R.string.atmospheric_pressure),
-            value = currentWeatherUi.pressureMmHg.toString(),
+            value = currentWeatherUi.pressureMmHg,
             measure = stringResource(id = R.string.millimetre_of_mercury),
         )
         WeatherItem(
             parameter = stringResource(id = R.string.uv_index),
-            value = currentWeatherUi.uv.toString(),
+            value = currentWeatherUi.uv,
         )
     }
 }

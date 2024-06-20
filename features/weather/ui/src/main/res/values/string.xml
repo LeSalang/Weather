@@ -25,7 +25,7 @@
 
     <!-- Weather -->
     <string name="atmospheric_pressure">Atmospheric pressure: \u0020 </string>
-    <string name="temp">%.1f°C</string>
+    <string name="temp">%s°C</string>
     <string name="uv_index">UV Index: \u0020</string>
     <string name="wind_direction">Wind direction: \u0020</string>
     <string name="wind_speed">Wind speed: \u0020</string>

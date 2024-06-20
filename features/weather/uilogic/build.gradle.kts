@@ -11,8 +11,6 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.androidSdk.min.get().toInt()
-
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {

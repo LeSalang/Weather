@@ -98,17 +98,17 @@ private fun Hour.toHourUi(): HourUi {
 internal fun CurrentWeather.toCurrentWeatherUi(): CurrentWeatherUi {
     return CurrentWeatherUi(
         lastUpdated = lastUpdated,
-        tempC = tempC,
+        tempC = tempC.roundToInt().toString(),
         conditionText = conditionText,
         conditionIcon = conditionIcon,
-        windKph = windKph,
+        windKph = windKph.roundToInt().toString(),
         windDir = windDir,
-        pressureMmHg = pressureMmHg.roundToInt(),
-        precipMm = precipMm,
-        humidity = humidity,
-        feelslikeC = feelslikeC,
-        uv = uv.roundToInt(),
-        gustKph = gustKph,
+        pressureMmHg = pressureMmHg.roundToInt().toString(),
+        precipMm = precipMm.roundToInt().toString(),
+        humidity = humidity.toString(),
+        feelslikeC = feelslikeC.roundToInt().toString(),
+        uv = uv.roundToInt().toString(),
+        gustKph = gustKph.roundToInt().toString(),
     )
 }
 
@@ -125,12 +125,12 @@ internal fun Astro.toAstroUi(): AstroUi {
 
 internal fun AirQuality.toAirQualityUi(): AirQualityUi {
     return AirQualityUi(
-        co = co,
-        no2 = no2,
-        o3 = o3,
-        so2 = so2,
-        pm25 = pm25,
-        pm10 = pm10,
+        co = co.roundToInt().toString(),
+        no2 = no2.roundToInt().toString(),
+        o3 = o3.roundToInt().toString(),
+        so2 = so2.roundToInt().toString(),
+        pm25 = pm25.roundToInt().toString(),
+        pm10 = pm10.roundToInt().toString(),
     )
 }
 
