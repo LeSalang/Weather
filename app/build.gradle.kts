@@ -68,9 +68,9 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     // Modules
-    implementation(project(":api"))
-    implementation(project(":common"))
-    implementation(project(":data"))
-    implementation(project(":ui"))
-    implementation(project(":uikit"))
+    implementation(project(":core:api"))
+    implementation(project(":core:common"))
+    implementation(project(":core:data"))
+    implementation(project(":core:uikit"))
+    implementation(project(":features:weather:ui"))
 }
