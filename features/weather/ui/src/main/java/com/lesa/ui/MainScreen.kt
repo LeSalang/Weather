@@ -2,11 +2,11 @@ package com.lesa.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
@@ -47,9 +47,9 @@ internal fun MainScreen(
                 LazyColumn(
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally,
+                    contentPadding = PaddingValues(dimen16),
                     modifier = modifier
                         .fillMaxSize()
-                        .padding(dimen16)
                 ) {
                     item {
                         LocationView(locationUi = weatherUi.locationUi)
