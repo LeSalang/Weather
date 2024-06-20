@@ -5,10 +5,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import com.lesa.uikit.WeatherTheme
 import com.lesa.uilogic.models.AstroUi
 
 @Composable
-fun AstroView(
+fun FutureWeatherView(
     astroUi: AstroUi,
     modifier: Modifier = Modifier,
 ) {
@@ -16,32 +18,28 @@ fun AstroView(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
-        Heading(
+        WeatherItem(
             text = stringResource(id = R.string.astronomy),
+            style = WeatherTheme.typography.headlineSmall,
+            textAlign = TextAlign.Center
         )
         WeatherItem(
-            parameter = stringResource(id = R.string.sunrise),
-            value = astroUi.sunriseTime
+            text = stringResource(id = R.string.sunrise, astroUi.sunriseTime)
         )
         WeatherItem(
-            parameter = stringResource(id = R.string.sunset),
-            value = astroUi.sunsetTime
+            text = stringResource(id = R.string.sunset, astroUi.sunsetTime)
         )
         WeatherItem(
-            parameter = stringResource(id = R.string.moonrise),
-            value = astroUi.moonriseTime
+            text = stringResource(id = R.string.moonrise, astroUi.moonriseTime)
         )
         WeatherItem(
-            parameter = stringResource(id = R.string.moonset),
-            value = astroUi.moonsetTime
+            text = stringResource(id = R.string.moonset, astroUi.moonsetTime)
         )
         WeatherItem(
-            parameter = stringResource(id = R.string.moon_phase),
-            value = astroUi.moonPhase
+            text = stringResource(id = R.string.moon_phase, astroUi.moonPhase)
         )
         WeatherItem(
-            parameter = stringResource(id = R.string.moon_illumination),
-            value = astroUi.moonIllumination.toString()
+            text = stringResource(id = R.string.moon_illumination, astroUi.moonIllumination)
         )
     }
 }

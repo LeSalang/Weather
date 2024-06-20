@@ -29,5 +29,5 @@ data class CurrentWeatherDto(
     @SerialName("uv") val uv: Double, // UV Index
     @SerialName("gust_mph") val gustMph: Double, // Wind gust in miles per hour
     @SerialName("gust_kph") val gustKph: Double, // Wind gust in kilometers per hour
-    @SerialName("air_quality") val airQuality: AirQualityDto // Air quality details
+    @SerialName("air_quality") val airQualityDto: AirQualityDto // Air quality details
 )

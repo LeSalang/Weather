@@ -2,6 +2,7 @@ package com.lesa.api
 
 import com.lesa.api.models.AirQualityIndex
 import com.lesa.api.models.CurrentWeatherResponseDto
+import com.lesa.api.models.WeatherResponseDto
 import com.lesa.api.models.astro.AstronomyResponseDto
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -28,6 +29,14 @@ interface WeatherApi {
         @Query("q") location: String = "Baku", // TODO delete after testing
         @Query("lang") lang: String? = null
     ): AstronomyResponseDto
+
+    @GET("forecast.json")
+    suspend fun getWeather(
+        @Query("q") location: String = "Baku", // TODO delete after testing
+        @Query("aqi") aqi: String = AirQualityIndex.ENABLED.value,
+        @Query("days") days: Int = 3,
+        @Query("lang") lang: String? = null
+    ): WeatherResponseDto
 }
 
 fun createWeatherApi(

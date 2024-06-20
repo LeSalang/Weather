@@ -19,8 +19,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lesa.uikit.Dimensions.dimen16
-import com.lesa.uikit.Dimensions.dimen32
-import com.lesa.uikit.Dimensions.dimen64
 import com.lesa.uikit.Dimensions.dimen8
 import com.lesa.uikit.WeatherTheme
 import com.lesa.uilogic.MainScreenViewModel
@@ -41,31 +39,36 @@ internal fun MainScreen(
     mainScreenViewModel: MainScreenViewModel,
     modifier: Modifier = Modifier,
 ) {
-    val currentWeatherViewState by mainScreenViewModel.currentWeatherViewState.collectAsState()
-    val astroViewState by mainScreenViewModel.astroViewState.collectAsState()
-    if (currentWeatherViewState is ViewState.Loading || astroViewState is ViewState.Loading) {
-        LoadingView()
-    } else {
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(dimen32),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier
-                .fillMaxSize()
-                .padding(dimen16)
-        ) {
-            item {
-                CurrentWeatherView(
-                    currentWeatherViewState = currentWeatherViewState,
-                )
-                AstroView(astroViewState = astroViewState,)
-                Spacer(modifier = Modifier.size(dimen64))
-                Row(
-                    horizontalArrangement = Arrangement.SpaceAround,
-                    modifier = Modifier
-                        .fillMaxWidth()
+    val weatherViewState by mainScreenViewModel.weatherViewState.collectAsState()
+    when (weatherViewState) {
+        ViewState.Loading -> LoadingView()
+        is ViewState.Error -> ErrorView(errorMessage = (weatherViewState as ViewState.Error).errorMessage)
+        is ViewState.Success -> {
+            (weatherViewState as ViewState.Success).data.let { weatherUi ->
+                LazyColumn(
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = modifier
+                        .fillMaxSize()
+                        .padding(dimen16)
                 ) {
-                    FutureWeatherBlock()
-                    FutureWeatherBlock()
+                    item {
+                        LocationView(locationUi = weatherUi.locationUi,)
+                        CurrentWeatherView(currentWeatherUi = weatherUi.currentWeatherUi,)
+                        Spacer(modifier = Modifier.size(dimen16))
+                        AstroView(astroUi = weatherUi.forecastDayUiList.first().astroUi,)
+                        Spacer(modifier = Modifier.size(dimen16))
+                        AirQualityView(airQuality = weatherUi.airQualityUi)
+                        Spacer(modifier = Modifier.size(dimen16))
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceAround,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        ) {
+                            FutureWeatherBlock()
+                            FutureWeatherBlock()
+                        }
+                    }
                 }
             }
         }
