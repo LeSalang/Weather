@@ -19,20 +19,20 @@ interface WeatherApi {
 
     @GET("current.json")
     suspend fun getCurrentWeather(
-        @Query("q") location: String = "Baku", // TODO delete after testing
+        @Query("q") location: String,
         @Query("aqi") aqi: String = AirQualityIndex.ENABLED.value,
         @Query("lang") lang: String? = null
     ): CurrentWeatherResponseDto
 
     @GET("astronomy.json")
     suspend fun getAstronomy(
-        @Query("q") location: String = "Baku", // TODO delete after testing
+        @Query("q") location: String,
         @Query("lang") lang: String? = null
     ): AstronomyResponseDto
 
     @GET("forecast.json")
     suspend fun getWeather(
-        @Query("q") location: String = "Baku", // TODO delete after testing
+        @Query("q") location: String,
         @Query("aqi") aqi: String = AirQualityIndex.ENABLED.value,
         @Query("days") days: Int = 3,
         @Query("lang") lang: String? = null

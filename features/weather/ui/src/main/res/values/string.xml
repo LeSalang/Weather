@@ -4,6 +4,8 @@
     <string name="last_updated">Last updated: %s</string>
     <string name="location">%s, %s</string>
     <string name="current_weather">Current weather</string>
+    <string name="enter_location">Enter your location</string>
+    <string name="find_weather">Find weather</string>
 
     <!-- Air quality -->
     <string name="air_quality">Air quality</string>
@@ -36,5 +38,10 @@
     <string name="micrograms_per_cubic_metre">\u0020 μg/m3</string>
     <string name="millimetre_of_mercury">\u0020 mmHg</string>
     <string name="percent">%</string>
+
+    <!-- Buttons -->
+    <string name="btn_refresh">Refresh</string>
+    <string name="btn_get_location">Get location</string>
+    <string name="btn_search_location">Search location</string>
 
 </resources>

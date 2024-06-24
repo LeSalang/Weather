@@ -40,15 +40,22 @@ android {
 dependencies {
     // Core
     implementation(libs.androidx.core.ktx)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.play.services)
 
     // DI
     implementation(libs.hilt.android)
     implementation(libs.javax.inject)
     kapt(libs.hilt.compiler)
 
+    // Location
+    implementation(libs.play.services.location)
+
     // UI
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.lottie.compose)
+    implementation(libs.compose.activity)
 
     // Modules
     implementation(project(":core:uikit"))

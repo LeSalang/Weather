@@ -1,10 +1,18 @@
 package com.lesa.uilogic
 
+import android.annotation.SuppressLint
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationToken
+import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.gms.tasks.OnTokenCanceledListener
 import com.lesa.common.Logger
 import com.lesa.uilogic.models.WeatherUi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -16,22 +24,24 @@ import javax.inject.Provider
 @HiltViewModel
 class MainScreenViewModel @Inject internal constructor(
     private val weatherUseCaseProvider: Provider<GetWeatherUseCase>,
-    private val logger: Logger
+    private val logger: Logger,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     private val _weatherViewState: MutableStateFlow<ViewState<WeatherUi>> = MutableStateFlow(ViewState.Loading)
     val weatherViewState: StateFlow<ViewState<WeatherUi>>
         get() = _weatherViewState
 
-    init {
-        fetchWeather()
-    }
+    var location: MutableStateFlow<String> = MutableStateFlow("Ekaterinburg")
 
     @Suppress("TooGenericExceptionCaught")
-    private fun fetchWeather() {
+    fun fetchWeather(location: String = this.location.value) {
         viewModelScope.launch {
             try {
-                _weatherViewState.value = ViewState.Success(weatherUseCaseProvider.get().invoke())
+                _weatherViewState.value = ViewState.Success(
+                    weatherUseCaseProvider.get()
+                        .invoke(location = location)
+                )
             } catch (e: IOException) {
                 logger.e("MainScreenViewModel", "Weather network error: ${e.message}")
                 _weatherViewState.value = ViewState.Error("Network error: ${e.message}")
@@ -42,6 +52,27 @@ class MainScreenViewModel @Inject internal constructor(
                 logger.e("MainScreenViewModel", "Weather unexpected error: ${e.message}")
                 _weatherViewState.value = ViewState.Error("Unexpected error: ${e.message}")
             }
+        }
+    }
+    val locationClient = LocationServices.getFusedLocationProviderClient(context)
+    var locationInfo = ""
+
+    private val cancellationToken = object : CancellationToken() {
+        override fun onCanceledRequested(listener: OnTokenCanceledListener) =
+            CancellationTokenSource().token
+        override fun isCancellationRequested() = false
+    }
+
+    @SuppressLint("MissingPermission")
+    fun detectLocation() {
+        locationClient.getCurrentLocation(
+            Priority.PRIORITY_HIGH_ACCURACY,
+            cancellationToken,
+        ).addOnSuccessListener {
+            locationInfo = "${it.latitude}, ${it.longitude}"
+            fetchWeather(location = locationInfo)
+        }.addOnFailureListener {
+            logger.e("MainScreenViewModel", "Location error: ${it.message}")
         }
     }
 }

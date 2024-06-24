@@ -7,8 +7,8 @@ import javax.inject.Inject
 internal class GetCurrentWeatherUseCase @Inject constructor(
     private val repository: WeatherRepository
 ) {
-    suspend fun invoke(): CurrentWeatherUi {
-        return repository.getCurrentWeather()
+    suspend fun invoke(location: String): CurrentWeatherUi {
+        return repository.getCurrentWeather(location = location)
             .toCurrentWeatherUi()
     }
 }

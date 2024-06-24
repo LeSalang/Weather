@@ -7,29 +7,29 @@ import com.lesa.data.models.Weather
 import javax.inject.Inject
 
 interface WeatherRepository {
-    suspend fun getCurrentWeather(): CurrentWeather
+    suspend fun getCurrentWeather(location: String): CurrentWeather
 
-    suspend fun getAstro(): Astro
+    suspend fun getAstro(location: String): Astro
 
-    suspend fun getWeather(): Weather
+    suspend fun getWeather(location: String): Weather
 }
 
 class WeatherRepositoryImpl @Inject constructor(
     private val api: WeatherApi
 ) : WeatherRepository {
-    override suspend fun getCurrentWeather(): CurrentWeather {
-        return api.getCurrentWeather()
+    override suspend fun getCurrentWeather(location: String): CurrentWeather {
+        return api.getCurrentWeather(location = location)
             .currentWeather
             .toCurrentWeather()
     }
 
-    override suspend fun getAstro(): Astro {
-        return api.getAstronomy()
+    override suspend fun getAstro(location: String): Astro {
+        return api.getAstronomy(location = location)
             .toAstro()
     }
 
-    override suspend fun getWeather(): Weather {
-        return api.getWeather()
+    override suspend fun getWeather(location: String): Weather {
+        return api.getWeather(location = location)
             .toWeather()
     }
 }

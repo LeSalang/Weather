@@ -32,6 +32,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.hilt.android)
+    implementation(libs.play.services.location)
+    implementation(libs.kotlinx.coroutines.play.services)
     kapt(libs.hilt.compiler)
 
     implementation(project(":core:common"))
